@@ -1,0 +1,10 @@
+<h1>Edit <%= @restaurant.name %> </h1>
+
+<%= simple_form_for @cocktail do |f| %>
+  <%= f.input :name %>
+
+  <%= f.button :submit %>
+<% end %>
+
+<%= link_to "return", cocktails_path %>
+<%= link_to "destroy", cocktail_path(@cocktail), method: :delete %>
