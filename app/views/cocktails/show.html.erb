@@ -1,19 +1,24 @@
-<h1> <%= @cocktail.name %> </h1>
 
-<% @cocktail.doses.each do |dose| %>
-  <ul>
-    <li>
-      <%= dose.description %>
-    </li>
-    <li>
-      <%= dose.ingredient[:name] %>
-    </li>
-    <li>
-      <%= link_to "destroy", dose_path(dose), method: :delete %>
-    </li>
-  </ul>
-<% end %>
-
-
-<%= link_to "retour", root_path %>
-<%= link_to "add ingredient", new_cocktail_dose_path(@cocktail) %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <h1><%= @cocktail.name %>
+        <%= link_to "&times;".html_safe, cocktail_path(@cocktail), method: :delete %>
+      </h1>
+      <ul>
+        <% @cocktail.doses.each do |dose| %>
+          <% if dose.persisted? %>
+            <li>
+              <%= dose.description %> <%= dose.ingredient.name %>
+              <%= link_to "&times;".html_safe, dose_path(dose), method: :delete %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+      <p>
+        <%= render "doses/form", cocktail: @cocktail, dose: @dose %>
+      </p>
+      <%= link_to 'Back', root_path %>
+    </div>
+  </div>
+</div>

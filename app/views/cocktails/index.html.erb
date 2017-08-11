@@ -1,11 +1,23 @@
-<h1>Cocktails</h1>
 
-<h3> <%= link_to "create Cocktail", new_cocktail_path %> </h3>
+<h1 class="text-center">Your cocktail list</h1>
 
-<% @cocktails.each do |cocktail| %>
-<ul>
-  <li>
-    <%= link_to cocktail.name, cocktail_path(cocktail) %>
-  </li>
-</ul>
-<% end %>
+<div class="text-center padded">
+  <%= link_to "Create a cocktail", new_cocktail_path, class: "btn btn-primary" %>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <% @cocktails.each do |cocktail| %>
+      <div class="col-xs-12 col-sm-4 text-center">
+      <% if @product.photo? %>
+  <%= cl_image_tag @product.photo.path, width: 200, height: 200, crop: :fill %>
+      <% end %>
+        <div class="card text-center">
+          <div class="card-body">
+            <%= link_to cocktail.name, cocktail_path(cocktail) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
